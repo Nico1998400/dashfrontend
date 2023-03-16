@@ -1,12 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { Navigate } from 'react-router';
-import { useLocalState } from "../util/useLocalState";
+import Cookies from 'js-cookie';
 
 const PrivateRoute = ({ children }) => {
-    const [jwt, setJwt] = useLocalState("", "jwt");
-  return jwt ? children : <Navigate to="/"/>
-    
-  
-}
+  const jwtToken = Cookies.get('JWT_TOKEN');
+  return jwtToken ? children : <Navigate to="/" />;
+};
 
-export default PrivateRoute
+export default PrivateRoute;

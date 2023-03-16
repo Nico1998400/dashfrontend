@@ -11,14 +11,15 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/api/v1/auth/login2', {
+      const response = await fetch('http://localhost:8080/api/v1/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
-  
+
       if (response.ok) {
         console.log('Login successful');
         navigate('/home'); // Navigate to the HomePage
