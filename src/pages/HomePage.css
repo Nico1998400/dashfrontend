@@ -1,0 +1,27 @@
+body {
+  background-color: #222;
+  color: #fff;
+}
+
+h1 {
+  color: #fff;
+}
+
+select {
+  background-color: #333;
+  border: 1px solid #555;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+select:focus {
+  outline: none;
+}
+
+option {
+  background-color: #333;
+  color: #fff;
+}
