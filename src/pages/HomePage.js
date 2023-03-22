@@ -6,6 +6,8 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
   const [foodItemId, setFoodItemId] = useState(null);
+  const [shouldFetchCategories, setShouldFetchCategories] = useState(false);
+
 
   const fetchCategories = async () => {
     try {
@@ -30,7 +32,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [shouldFetchCategories]);
   
 const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
@@ -60,6 +62,7 @@ const handleCategoryChange = (event) => {
       prevFoodItems.map((foodItem) => (foodItem.id === updatedFoodItem.id ? updatedFoodItem : foodItem))
     );
     setFoodItemId(null);
+    setShouldFetchCategories((prevShouldFetchCategories) => !prevShouldFetchCategories);
   };
 
   return (
