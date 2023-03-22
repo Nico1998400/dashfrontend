@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const EditFoodItem = ({ foodItemId, onClose, onSave }) => {
+const EditFoodItem = ({ foodItemId, categoryId, onClose, onSave }) => {
     const [foodItem, setFoodItem] = useState({});
   
     const fetchFoodItem = async () => {
@@ -36,7 +36,9 @@ const EditFoodItem = ({ foodItemId, onClose, onSave }) => {
   
     const handleSaveClick = async (event) => {
       event.preventDefault();
-      console.log("PUT foodItemID", foodItemId)
+    
+      const updatedFoodItem = { ...foodItem, category: { id: categoryId } };
+    
       try {
         const response = await fetch(`http://localhost:8080/api/v1/fooditem/${foodItemId}`, {
           method: 'PUT',
@@ -44,14 +46,13 @@ const EditFoodItem = ({ foodItemId, onClose, onSave }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(foodItem),
+          body: JSON.stringify(updatedFoodItem),
         });
-  
+    
         if (!response.ok) {
           throw new Error(`Failed to update food item: ${response.statusText}`);
         }
-  
-        const updatedFoodItem = await response.json();
+    
         onSave(updatedFoodItem);
       } catch (error) {
         console.error('Error updating food item:', error);

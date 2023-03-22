@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './HomePage.css';
+import EditFoodItem from '../components/EditFoodItem';
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
-
+  const [foodItemId, setFoodItemId] = useState(null);
 
   const fetchCategories = async () => {
     try {
@@ -13,7 +14,6 @@ const HomePage = () => {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-      
         },
       });
 
@@ -30,18 +30,36 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchCategories();
-    console.log(categories);
   }, []);
+  
+const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
+ 
+const handleCategoryChange = (event) => {
+  const categoryId = event.target.value;
+  if (categoryId) {
+    const selectedCategory = categories.find((category) => category.id === parseInt(categoryId));
+    setFoodItems(selectedCategory.foodItems);
+    setSelectedCategoryId(parseInt(categoryId));
+  } else {
+    setFoodItems([]);
+    setSelectedCategoryId(null);
+  }
+};
 
-  const handleCategoryChange = (event) => {
-    const categoryId = event.target.value;
-    if (categoryId) {
-      const selectedCategory = categories.find((category) => category.id === parseInt(categoryId));
-      setFoodItems(selectedCategory.foodItems);
-    } else {
-      setFoodItems([]);
-    }
+  const handleEditClick = (foodItemId) => {
+    setFoodItemId(foodItemId);
+  };
+
+  const handleEditClose = () => {
+    setFoodItemId(null);
+  };
+
+  const handleEditSave = (updatedFoodItem) => {
+    setFoodItems((prevFoodItems) =>
+      prevFoodItems.map((foodItem) => (foodItem.id === updatedFoodItem.id ? updatedFoodItem : foodItem))
+    );
+    setFoodItemId(null);
   };
 
   return (
@@ -62,9 +80,12 @@ const HomePage = () => {
             <p>{foodItem.foodDescription}</p>
             <p>Food Number: {foodItem.foodNumber}</p>
             <p>Price: {foodItem.price}</p>
+            <button onClick={() => handleEditClick(foodItem.id)}>Edit</button>
           </div>
         ))}
       </div>
+      
+      {foodItemId && <EditFoodItem foodItemId={foodItemId} onClose={handleEditClose} onSave={handleEditSave} categoryId={selectedCategoryId} />}
     </div>
   );
 };
