@@ -12,7 +12,7 @@ const HomePage = () => {
     try {
       const response = await fetch("http://localhost:8080/api/v1/category", {
         method: "GET",
-        credentials: "include",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
@@ -35,7 +35,7 @@ const HomePage = () => {
         `http://localhost:8080/api/v1/category/${categoryId}`,
         {
           method: "DELETE",
-          credentials: "include",
+          credentials: 'include',
           headers: {
             "Content-Type": "application/json",
           },
@@ -63,7 +63,7 @@ const HomePage = () => {
         `http://localhost:8080/api/v1/fooditem/${foodItemId}`,
         {
           method: "DELETE",
-          credentials: "include",
+          credentials: 'include',
           headers: {
             "Content-Type": "application/json",
           },
@@ -125,6 +125,34 @@ const HomePage = () => {
     );
   };
 
+  const [newCategory, setNewCategory] = useState("");
+
+  const handleCreateCategory = async (event) => {
+    event.preventDefault();
+  console.log(newCategory, "newitem")
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/category/post", {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ categoryTitle: newCategory }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to create category: ${response.statusText}`);
+      }
+  
+      setNewCategory("");
+      setShouldFetchCategories(
+        (prevShouldFetchCategories) => !prevShouldFetchCategories
+      );
+    } catch (error) {
+      console.error("Error creating category:", error);
+    }
+  };
+
   return (
     <div>
     <h1>Home</h1>
@@ -142,31 +170,45 @@ const HomePage = () => {
     >
       Delete Category
     </button>
-      <div className="food-items">
-        {foodItems.map((foodItem) => (
-          <div key={foodItem.id} className="food-item">
-            <h3>{foodItem.foodName}</h3>
-            <p>{foodItem.foodDescription}</p>
-            <p>Food Number: {foodItem.foodNumber}</p>
-            <p>Price: {foodItem.price}</p>
-            <button onClick={() => handleEditClick(foodItem.id)}>Edit</button>
-            <button onClick={() => handleDeleteClick(foodItem.id)}>
-              Delete
-            </button>
-          </div>
-        ))}
-      </div>
 
-      {foodItemId && (
-        <EditFoodItem
-          foodItemId={foodItemId}
-          onClose={handleEditClose}
-          onSave={handleEditSave}
-          categoryId={selectedCategoryId}
-        />
-      )}
+    {/* Add the form for creating a new category */}
+    <form onSubmit={handleCreateCategory}>
+      <label htmlFor="newCategory">New Category: </label>
+      <input
+        type="text"
+        id="newCategory"
+        value={newCategory}
+        onChange={(e) => setNewCategory(e.target.value)}
+        required
+      />
+      <button type="submit">Create Category</button>
+    </form>
+
+    <div className="food-items">
+      {foodItems.map((foodItem) => (
+        <div key={foodItem.id} className="food-item">
+          <h3>{foodItem.foodName}</h3>
+          <p>{foodItem.foodDescription}</p>
+          <p>Food Number: {foodItem.foodNumber}</p>
+          <p>Price: {foodItem.price}</p>
+          <button onClick={() => handleEditClick(foodItem.id)}>Edit</button>
+          <button onClick={() => handleDeleteClick(foodItem.id)}>
+            Delete
+          </button>
+        </div>
+      ))}
     </div>
-  );
-};
+
+    {foodItemId && (
+      <EditFoodItem
+        foodItemId={foodItemId}
+        onClose={handleEditClose}
+        onSave={handleEditSave}
+        categoryId={selectedCategoryId}
+      />
+    )}
+  </div>
+);
+    }
 
 export default HomePage;
