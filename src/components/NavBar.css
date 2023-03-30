@@ -1,0 +1,51 @@
+.navbar {
+  position: relative;
+}
+
+.arrow-open,
+.arrow-close {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.side-menu {
+  position: fixed;
+  width: 15%;
+  height: 100%;
+  background-color: white;
+  z-index: 1000;
+}
+
+.side-menu-header {
+  color: #9700cc;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 4px #9b9b9b;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  padding-left: 20%;
+}
+
+.restaurant-header {
+  margin-right: 20px;
+}
+
+.side-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu li {
+  color: #000000;
+  cursor: pointer;
+  margin-top: 10%;
+  margin-left: 20%;
+  font-weight: bold;
+}
+
+.side-menu li.active {
+  text-decoration: underline 2px;
+}
