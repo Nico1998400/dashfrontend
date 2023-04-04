@@ -5,9 +5,23 @@
   margin: 0;
   padding: 0;
   font-family: 'Dosis', 'PT Sans', sans-serif;
-  
 }
 
 body {
   background-color: #EDEBEB;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.NavBar {
+  /* Add any specific styling for the NavBar component here */
+}
+
+.routes-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin: 50px;
 }

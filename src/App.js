@@ -12,18 +12,20 @@ import NavBar from './components/Navbar';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-      <NavBar />
-        <ScrollToTop />
-        <Routes>
-          <Route exact path="/" element={<LoginPage />} />
-          <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
-          <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
-          <Route path="/editwebsite" element={<PrivateRoute><EditWebsite /></PrivateRoute>} />
-          <Route path="/editmenu" element={<PrivateRoute><EditMenu /></PrivateRoute>} />
-        </Routes>
-      </BrowserRouter>
+  <BrowserRouter>
+    <NavBar />
+    <div className="routes-container">
+      <ScrollToTop />
+      <Routes>
+        <Route exact path="/" element={<LoginPage />} />
+        <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+        <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
+        <Route path="/editwebsite" element={<PrivateRoute><EditWebsite /></PrivateRoute>} />
+        <Route path="/editmenu" element={<PrivateRoute><EditMenu /></PrivateRoute>} />
+      </Routes>
     </div>
+  </BrowserRouter>
+</div>
   );
 }
 
