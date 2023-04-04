@@ -5,11 +5,15 @@ import { MdModeEdit } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import CategoryEdit from "./CategoryEdit";
 
-const CategoryList = ({}) => {
+const CategoryList = ({setSelectedCategoryTitle}) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
   const [categoryToEdit, setCategoryToEdit] = useState(null);
+
+  const handleCategoryClick = (categoryTitle) => {
+    setSelectedCategoryTitle(categoryTitle);
+  };
 
   const openEditPopup = (category) => {
     setCategoryToEdit(category);
@@ -85,7 +89,7 @@ const CategoryList = ({}) => {
   return (
    <div className="categorylist-container">
       {categories.map((category) => (
-        <div key={category.id} className="category-item">
+        <div key={category.id} className="category-item" onClick={() => handleCategoryClick(category.categoryTitle)}>
           <div className="icon-container">
             <BsThreeDotsVertical className="dot-icon" />
             <MdModeEdit

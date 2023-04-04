@@ -11,6 +11,7 @@ const EditWebiste = () => {
   const [foodItemId, setFoodItemId] = useState(null);
   const [shouldFetchCategories, setShouldFetchCategories] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedCategoryTitle, setSelectedCategoryTitle] = useState("");
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -91,10 +92,10 @@ const EditWebiste = () => {
           <h2 className="seperate-arrow-open">Category</h2>
           <AiOutlinePlus className="arrow-open" onClick={openPopup} />
         </div>
-        <CategoryList />
+        <CategoryList setSelectedCategoryTitle={setSelectedCategoryTitle} />
       </div>
       <div className="category-name">
-        <h2 className="seperate-arrow-open">CategoryName</h2>
+        <h2 className="seperate-arrow-open">{selectedCategoryTitle || "CategoryName"}</h2>
         <AiOutlinePlus className="arrow-open" />
       </div>
       <CategoryCreate isOpen={isPopupOpen} onClose={closePopup} />
