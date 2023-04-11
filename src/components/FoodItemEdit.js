@@ -68,6 +68,17 @@ const FoodItemEdit = ({ isOpen, onClose, foodItem }) => {
           />
           <input
             type="number"
+            value={updatedFoodItem.foodNumber}
+            onChange={(e) =>
+              setUpdatedFoodItem({
+                ...updatedFoodItem,
+                foodNumber: parseFloat(e.target.value),
+              })
+            }
+            placeholder="Food Number"
+          />
+          <input
+            type="number"
             value={updatedFoodItem.price}
             onChange={(e) =>
               setUpdatedFoodItem({
