@@ -40,27 +40,25 @@ const EditWebiste = () => {
           setSelectedCategoryId={setSelectedCategoryId}
         />
       </div>
+      <div className="category-section">
       <div className="category-name">
         <h2 className="seperate-arrow-open">
           {selectedCategoryTitle || "CategoryName"}
         </h2>
         <AiOutlinePlus className="arrow-open" onClick={openFoodItemPopup} />
       </div>
-      <div className="food-item-section">
-  <FoodItemList selectedCategoryId={selectedCategoryId} />
-         </div>
+      <FoodItemList selectedCategoryId={selectedCategoryId} />
+      </div>
       <FoodItemCreate
         isOpen={isFoodItemPopupOpen}
         onClose={closeFoodItemPopup}
         selectedCategoryId={selectedCategoryId}
         selectedCategoryTitle={selectedCategoryTitle}
       />
-      
       <CategoryCreate
         isOpen={isCategoryPopupOpen}
         onClose={closeCategoryPopup}
       />
-      
     </div>
   );
 };
