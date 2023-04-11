@@ -65,6 +65,7 @@ const EditWebiste = () => {
       </div>
       <FoodItemCreate
         onFoodItemCreated={refreshFoodItemList}
+        refreshCategories={refreshCategories}
         isOpen={isFoodItemPopupOpen}
         onClose={closeFoodItemPopup}
         selectedCategoryId={selectedCategoryId}

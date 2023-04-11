@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './FoodItemCreate.css';
 
-function FoodItemCreate({ isOpen, onClose, onFoodItemCreated }) {
+function FoodItemCreate({ isOpen, onClose, onFoodItemCreated, refreshCategories}) {
   const [newFoodItem, setNewFoodItem] = useState({
     foodName: '',
     foodDescription: '',
@@ -15,7 +15,7 @@ function FoodItemCreate({ isOpen, onClose, onFoodItemCreated }) {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [refreshCategories]);
 
   const fetchCategories = async () => {
     try {
