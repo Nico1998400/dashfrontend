@@ -4,6 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import CategoryList from "../components/CategoryList";
 import CategoryCreate from "../components/CategoryCreate";
 import FoodItemCreate from "../components/FoodItemCreate";
+import FoodItemList from "../components/FoodItemList";
 
 const EditWebiste = () => {
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
@@ -45,16 +46,21 @@ const EditWebiste = () => {
         </h2>
         <AiOutlinePlus className="arrow-open" onClick={openFoodItemPopup} />
       </div>
+      <div className="food-item-section">
+  <FoodItemList selectedCategoryId={selectedCategoryId} />
+         </div>
       <FoodItemCreate
         isOpen={isFoodItemPopupOpen}
         onClose={closeFoodItemPopup}
         selectedCategoryId={selectedCategoryId}
         selectedCategoryTitle={selectedCategoryTitle}
       />
+      
       <CategoryCreate
         isOpen={isCategoryPopupOpen}
         onClose={closeCategoryPopup}
       />
+      
     </div>
   );
 };

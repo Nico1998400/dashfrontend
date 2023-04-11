@@ -13,6 +13,7 @@ const CategoryList = ({ setSelectedCategoryTitle, setSelectedCategoryId }) => {
   const handleCategoryClick = (category) => {
     setSelectedCategoryTitle(category.categoryTitle);
     setSelectedCategoryId(category.id);
+    
   };
 
   const openEditPopup = (category) => {
@@ -85,7 +86,7 @@ const CategoryList = ({ setSelectedCategoryTitle, setSelectedCategoryId }) => {
   return (
    <div className="categorylist-container">
       {categories.map((category) => (
-        <div key={category.id} className="category-item" onClick={() => handleCategoryClick(category.categoryTitle)}>
+        <div key={category.id} className="category-item" onClick={() => handleCategoryClick(category)}>
           <div className="icon-container">
             <BsThreeDotsVertical className="dot-icon" />
             <MdModeEdit
