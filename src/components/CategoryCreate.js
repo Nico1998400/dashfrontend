@@ -44,7 +44,8 @@ const CategoryCreate = ({ isOpen, onClose, onCategoryCreated}) => {
   return (
     <div className="category-popup-container">
     <div className="category-popup">
-      <h2>Create New Category</h2>
+      <h2>New Category</h2>
+      <p>Name</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
