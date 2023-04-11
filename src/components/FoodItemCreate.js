@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './FoodItemCreate.css';
 
-function FoodItemCreate({ isOpen, onClose }) {
+function FoodItemCreate({ isOpen, onClose, onFoodItemCreated }) {
   const [newFoodItem, setNewFoodItem] = useState({
     foodName: '',
     foodDescription: '',
@@ -68,7 +68,9 @@ function FoodItemCreate({ isOpen, onClose }) {
       });
       setSelectedCategoryId(null);
       setSelectedCategoryTitle('');
+      onFoodItemCreated();
       onClose(); // Close the popup
+      
     } catch (error) {
       console.error('Error creating food item:', error);
     }

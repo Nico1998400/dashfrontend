@@ -11,6 +11,16 @@ const EditWebiste = () => {
   const [isFoodItemPopupOpen, setIsFoodItemPopupOpen] = useState(false);
   const [selectedCategoryTitle, setSelectedCategoryTitle] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [refreshCategories, setRefreshCategories] = useState(false);
+  const [refreshFoodItems, setRefreshFoodItems] = useState(false);
+
+
+  const refreshCategoryList = () => {
+  setRefreshCategories(!refreshCategories);
+  };
+  const refreshFoodItemList = () => {
+    setRefreshFoodItems(!refreshFoodItems);
+  };
 
   const openCategoryPopup = () => {
     setIsCategoryPopupOpen(true);
@@ -36,6 +46,7 @@ const EditWebiste = () => {
           <AiOutlinePlus className="arrow-open" onClick={openCategoryPopup} />
         </div>
         <CategoryList
+          refreshCategories={refreshCategories}
           setSelectedCategoryTitle={setSelectedCategoryTitle}
           setSelectedCategoryId={setSelectedCategoryId}
         />
@@ -47,9 +58,13 @@ const EditWebiste = () => {
         </h2>
         <AiOutlinePlus className="arrow-open" onClick={openFoodItemPopup} />
       </div>
-      <FoodItemList selectedCategoryId={selectedCategoryId} />
+      <FoodItemList 
+      selectedCategoryId={selectedCategoryId}
+      refreshFoodItems={refreshFoodItemList} 
+       />
       </div>
       <FoodItemCreate
+        onFoodItemCreated={refreshFoodItemList}
         isOpen={isFoodItemPopupOpen}
         onClose={closeFoodItemPopup}
         selectedCategoryId={selectedCategoryId}
@@ -58,6 +73,7 @@ const EditWebiste = () => {
       <CategoryCreate
         isOpen={isCategoryPopupOpen}
         onClose={closeCategoryPopup}
+        onCategoryCreated={refreshCategoryList}
       />
     </div>
   );

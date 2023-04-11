@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import "./CategoryCreate.css";
 
-const CategoryCreate = ({ isOpen, onClose}) => {
+const CategoryCreate = ({ isOpen, onClose, onCategoryCreated}) => {
     const [newCategory, setNewCategory] = useState("");
 
     const handleCreateCategory = async (newCategory) => {
@@ -25,6 +25,7 @@ const CategoryCreate = ({ isOpen, onClose}) => {
     
         setNewCategory("");
         onClose(); // Close the popup
+        onCategoryCreated();
       } catch (error) {
         console.error("Error creating category:", error);
       }

@@ -6,7 +6,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import FoodItemEdit from "./FoodItemEdit";
 
 
-const FoodItemList = ({ selectedCategoryId }) => {
+const FoodItemList = ({ selectedCategoryId, refreshFoodItems }) => {
   const [foodItems, setFoodItems] = useState([]);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
   const [foodItemToEdit, setFoodItemToEdit] = useState(null);
@@ -58,7 +58,7 @@ const FoodItemList = ({ selectedCategoryId }) => {
 
     console.log("Fetching food items for category ID:", selectedCategoryId);
     fetchFoodItems();
-  }, [selectedCategoryId]);
+  }, [selectedCategoryId, refreshFoodItems]);
 
   const filteredFoodItems = foodItems.filter(foodItem => foodItem.category.id === selectedCategoryId);
 

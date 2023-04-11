@@ -5,7 +5,7 @@ import { MdModeEdit } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import CategoryEdit from "./CategoryEdit";
 
-const CategoryList = ({ setSelectedCategoryTitle, setSelectedCategoryId }) => {
+const CategoryList = ({ setSelectedCategoryTitle, setSelectedCategoryId, refreshCategories }) => {
   const [categories, setCategories] = useState([]);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
   const [categoryToEdit, setCategoryToEdit] = useState(null);
@@ -34,7 +34,7 @@ const CategoryList = ({ setSelectedCategoryTitle, setSelectedCategoryId }) => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [refreshCategories]);
 
   const fetchCategories = async () => {
     try {
